@@ -36,28 +36,37 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>surefire</artifactId>
-				<version>2.18.1</version>
-				<configuration>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
 						<optimize>true</optimize>
 						<deprecation>true</deprecation>
 					</configuration>
-					<forkMode>always</forkMode>
-					<systemPropertyVariables>
-						<reporter.debug>false</reporter.debug>
-					</systemPropertyVariables>
-					<suiteXmlFiles>
-						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
-					</suiteXmlFiles>
-				</configuration>
-			</plugin>
-		</plugins>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.17</version>
+					<configuration>
+						<argLine>-XX:-UseSplitVerifier</argLine>
+						<suiteXmlFiles>
+							<suiteXmlFile>${testSuiteXmlFile}</suiteXmlFile>
+						</suiteXmlFiles>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.17</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>
